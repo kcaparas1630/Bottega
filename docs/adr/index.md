@@ -13,7 +13,7 @@ one and update the old one's status.
 | 005 | ["Bricks Bodega" design language](005-bricks-bodega-design-language.md)                                                | Layout superseded by 012 |
 | 006 | [The logo ships as inline SVG, not WebP](006-logo-ships-as-inline-svg.md)                                              | Accepted                 |
 | 007 | [Placeholder photo library until the Stocksy API is approved](007-placeholder-photo-library-until-stocksy.md)          | Accepted (temporary)     |
-| 008 | [Rule-based placeholder for the shopkeeper assistant](008-placeholder-shopkeeper-assistant.md)                         | Accepted (temporary)     |
+| 008 | [Rule-based placeholder for the shopkeeper assistant](008-placeholder-shopkeeper-assistant.md)                         | Superseded by 026        |
 | 009 | [Canvas state in a Zustand entity store, autosaved over tRPC](009-canvas-state-and-autosave.md)                        | Accepted                 |
 | 010 | [Conventions are enforced by ESLint, scripts and a pre-commit hook](010-conventions-enforced-at-commit.md)             | Accepted                 |
 | 011 | [Pin ESLint 9 and TypeScript 6.0](011-pin-eslint-9-and-typescript-6.md)                                                | Accepted                 |
@@ -31,6 +31,7 @@ one and update the old one's status.
 | 023 | [The app rail expands and collapses](023-collapsible-app-rail.md)                                                      | Accepted                 |
 | 024 | [A new canvas starts blank, on the client](024-new-canvas-starts-blank.md)                                             | Accepted                 |
 | 025 | [The export is a proof: the design on real products, in real-time 3D](025-export-proof-in-real-time-3d.md)             | Proposed                 |
+| 026 | [The shopkeeper edits the design with Claude structured outputs](026-shopkeeper-edits-the-design-with-claude.md)       | Accepted                 |
 
 ## Writing a new ADR
 

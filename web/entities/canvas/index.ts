@@ -15,7 +15,7 @@ export { IMAGE_FILTER_CSS, SHAPE_BORDER_RADIUS } from './lib/element-style-css';
 export { PAGE_SIZE_PRESETS, type PageSizePreset } from './lib/page-size-presets';
 export { fontFamilyStyle, HOUSE_FONT_FAMILIES, isHouseFont } from './lib/text-font-style';
 export {
-  readCanvasSummary,
+  readCurrentDesign,
   useCanvasStore,
   useSelectedElement,
   type EditPace,

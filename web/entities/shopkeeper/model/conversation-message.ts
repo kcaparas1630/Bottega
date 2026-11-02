@@ -1,11 +1,6 @@
-import type { LibraryPhoto } from '@bottega/server';
+import type { ShopkeeperTranscriptEntry } from '@bottega/server';
 
-export type ConversationMessage = {
-  id: string;
-  author: 'customer' | 'shopkeeper';
-  text: string;
-  suggestions: LibraryPhoto[];
-};
+export type ConversationMessage = ShopkeeperTranscriptEntry;
 
 export const SHOPKEEPER_WELCOME: ConversationMessage = {
   id: 'shopkeeper-welcome',

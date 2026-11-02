@@ -1,7 +1,6 @@
 import type {
   CanvasDesign,
   CanvasElement,
-  CanvasSummary,
   ImageElement,
   ShapeElement,
   ShapeKind,
@@ -44,6 +43,7 @@ export type EditPace = 'continuous' | 'single';
 
 type CanvasActions = {
   loadDesign: (design: CanvasDesign) => void;
+  replaceDesign: (design: CanvasDesign) => void;
   selectElement: (elementId: string | null) => void;
   addPhoto: (photo: PlaceablePhoto, center?: PaperPoint) => void;
   addText: (presetName: TextPresetName) => void;
@@ -91,6 +91,13 @@ export const useCanvasStore = create<CanvasState & CanvasActions>()((set) => {
   return {
     ...INITIAL_CANVAS_STATE,
     loadDesign: (design) => set({ ...INITIAL_CANVAS_STATE, design }),
+    replaceDesign: (nextDesign) =>
+      set((state) => ({
+        ...applyEdit(state, null, (design) => ({ ...nextDesign, id: design.id })),
+        selectedElementId: nextDesign.elements.some(({ id }) => id === state.selectedElementId)
+          ? state.selectedElementId
+          : null,
+      })),
     selectElement: (selectedElementId) => set({ selectedElementId }),
     addPhoto: (photo, center) => insert((design) => createImageElement(photo, design, center)),
     addText: (presetName) => insert((design) => createTextElement(design, presetName)),
@@ -128,11 +135,7 @@ export function useSelectedElement() {
   );
 }
 
-// Reads element counts on demand, without subscribing a component to every edit.
-export function readCanvasSummary(): CanvasSummary {
-  const elements = useCanvasStore.getState().design?.elements ?? [];
-  return {
-    imageCount: elements.filter((element) => element.kind === 'image').length,
-    textCount: elements.filter((element) => element.kind === 'text').length,
-  };
+// Reads the working copy on demand, without subscribing a component to every edit.
+export function readCurrentDesign() {
+  return useCanvasStore.getState().design;
 }

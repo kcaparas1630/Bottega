@@ -37,9 +37,13 @@ layout (app rail, floating add dock, properties inspector) is [ADR 012](adr/012-
 
 ```sh
 bun install
+cp .env.example web/.env.local  # then set ANTHROPIC_API_KEY
 bun run dev          # http://localhost:3000
 bun run verify       # format, lint, convention checks, typecheck
 ```
+
+The shopkeeper calls Claude ([ADR 026](adr/026-shopkeeper-edits-the-design-with-claude.md)).
+Without `ANTHROPIC_API_KEY` everything else still works; the shopkeeper just apologises.
 
 The pre-commit hook runs lint-staged, `bun run check:conventions` and `bun run typecheck`.
 
@@ -47,8 +51,6 @@ The pre-commit hook runs lint-staged, `bun run check:conventions` and `bun run t
 
 - **Photos** come from a placeholder library until the Stocksy API is approved
   ([ADR 007](adr/007-placeholder-photo-library-until-stocksy.md)).
-- **The shopkeeper** is rule-based until a model is chosen
-  ([ADR 008](adr/008-placeholder-shopkeeper-assistant.md)).
-- **Designs** are stored in memory until a database is chosen
-  ([ADR 009](adr/009-canvas-state-and-autosave.md)).
+- **Designs** and **shopkeeper conversations** are stored in memory until a database is chosen
+  ([ADR 009](adr/009-canvas-state-and-autosave.md), [ADR 026](adr/026-shopkeeper-edits-the-design-with-claude.md)).
 - **Checkout** is a demo: no charge, nothing ships.

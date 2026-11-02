@@ -6,6 +6,7 @@ export const TEXT_ALIGNS = ['left', 'center', 'right'] as const;
 export const SHAPE_KINDS = ['rectangle', 'rounded', 'ellipse', 'arch'] as const;
 
 export const MIN_ELEMENT_OPACITY = 0.1;
+export const MAX_DESIGN_ELEMENTS = 100;
 
 // Any colour, as #RRGGBB; see docs/adr/014.
 const hexColorSchema = z.string().regex(/^#[0-9a-fA-F]{6}$/);
@@ -21,7 +22,7 @@ const elementFrameSchema = z.object({
   opacity: z.number().min(MIN_ELEMENT_OPACITY).max(1),
 });
 
-const imageElementSchema = elementFrameSchema.extend({
+export const imageElementSchema = elementFrameSchema.extend({
   kind: z.literal('image'),
   photoId: z.string().min(1),
   photoUrl: z.url(),
@@ -31,7 +32,7 @@ const imageElementSchema = elementFrameSchema.extend({
   crop: z.enum(IMAGE_CROPS),
 });
 
-const textElementSchema = elementFrameSchema.extend({
+export const textElementSchema = elementFrameSchema.extend({
   kind: z.literal('text'),
   content: z.string().max(280),
   fontFamily: fontFamilySchema,
@@ -41,7 +42,7 @@ const textElementSchema = elementFrameSchema.extend({
   color: hexColorSchema,
 });
 
-const shapeElementSchema = elementFrameSchema.extend({
+export const shapeElementSchema = elementFrameSchema.extend({
   kind: z.literal('shape'),
   shape: z.enum(SHAPE_KINDS),
   fill: hexColorSchema,
@@ -59,7 +60,7 @@ export const canvasDesignSchema = z.object({
   width: z.number().positive(),
   height: z.number().positive(),
   paperColor: hexColorSchema,
-  elements: z.array(canvasElementSchema).max(100),
+  elements: z.array(canvasElementSchema).max(MAX_DESIGN_ELEMENTS),
 });
 
 export type CanvasDesign = z.infer<typeof canvasDesignSchema>;

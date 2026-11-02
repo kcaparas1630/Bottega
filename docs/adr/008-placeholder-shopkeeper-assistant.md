@@ -1,6 +1,6 @@
 # ADR 008 — Rule-based placeholder for the shopkeeper assistant
 
-- **Status:** Accepted (temporary)
+- **Status:** Superseded by [ADR 026](026-shopkeeper-edits-the-design-with-claude.md)
 - **Date:** 2026-11-01
 
 ## Context

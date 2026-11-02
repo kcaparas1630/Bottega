@@ -1,6 +1,7 @@
 {
   "name": "bottega",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "packageManager": "bun@1.2.18",
   "workspaces": [

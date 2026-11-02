@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# next.js build output
+.next/
+out/
+web/next-env.d.ts
+
+# typescript and tooling caches
+*.tsbuildinfo
+.eslintcache
+
+# environment
+.env*
+!.env.example
+
+# misc
+.DS_Store
+.vercel
+coverage/

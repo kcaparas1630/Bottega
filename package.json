@@ -1,0 +1,38 @@
+{
+  "name": "bottega",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.2.18",
+  "workspaces": [
+    "web",
+    "server"
+  ],
+  "scripts": {
+    "dev": "bun run --filter @bottega/web dev",
+    "build": "bun run --filter @bottega/web build",
+    "start": "bun run --filter @bottega/web start",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p tsconfig.json --noEmit && bun run --filter '@bottega/*' typecheck",
+    "check:conventions": "bun scripts/conventions/check-conventions.ts",
+    "verify": "bun run format:check && bun run lint && bun run check:conventions && bun run typecheck",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^22.20.5",
+    "@typescript-eslint/utils": "^8.72.1",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "16.4.3",
+    "globals": "^17.14.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.7.0",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.1"
+  }
+}

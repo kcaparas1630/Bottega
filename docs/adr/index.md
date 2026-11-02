@@ -30,6 +30,7 @@ one and update the old one's status.
 | 022 | [The inspector returns to comfortable sizing](022-comfortable-inspector.md)                                            | Accepted                 |
 | 023 | [The app rail expands and collapses](023-collapsible-app-rail.md)                                                      | Accepted                 |
 | 024 | [A new canvas starts blank, on the client](024-new-canvas-starts-blank.md)                                             | Accepted                 |
+| 025 | [The export is a proof: the design on real products, in real-time 3D](025-export-proof-in-real-time-3d.md)             | Proposed                 |
 
 ## Writing a new ADR
 

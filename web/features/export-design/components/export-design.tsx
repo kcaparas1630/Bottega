@@ -1,28 +1,33 @@
 'use client';
 
 import { PackageOpen } from 'lucide-react';
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
-import { ExportFlowPanel } from './export-design/export-flow-panel';
+import { ProofRoom } from './export-design/proof-room';
 
 type ExportDesignProps = {
   // Renders the current design at a pixel width; the parent supplies it so features stay independent.
   renderDesign: (widthPx: number) => ReactNode;
 };
 
-// The pinned Export button and its one modal: pick a product, preview the fit, demo checkout.
+// After the editor settles, quietly fetch the 3D studio and the picture maker so Export opens straight into 3D.
+const WARM_UP_DELAY_MS = 1500;
+
+function warmUpProof() {
+  void import('./shared/product-scene');
+  void import('modern-screenshot');
+}
+
+// The pinned Export button and its proof: the design on a product in 3D, its options, and a demo checkout.
 export function ExportDesign({ renderDesign }: ExportDesignProps) {
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    const warmUpTimer = window.setTimeout(warmUpProof, WARM_UP_DELAY_MS);
+    return () => window.clearTimeout(warmUpTimer);
+  }, []);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -31,14 +36,11 @@ export function ExportDesign({ renderDesign }: ExportDesignProps) {
           Export
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[92dvh] overflow-y-auto rounded-hand bg-mortar-cream sm:max-w-4xl">
-        <DialogHeader>
-          <DialogTitle className="text-3xl">Take it to print</DialogTitle>
-          <DialogDescription>
-            Pick a product, check the fit, then try the demo checkout.
-          </DialogDescription>
-        </DialogHeader>
-        <ExportFlowPanel renderDesign={renderDesign} onClose={() => setIsOpen(false)} />
+      <DialogContent
+        showCloseButton={false}
+        className="flex h-[min(50rem,calc(100dvh-2rem))] w-[min(80rem,calc(100vw-2rem))] max-w-none flex-col gap-0 overflow-hidden rounded-xl border-0 bg-mortar-cream p-0 sm:max-w-none"
+      >
+        <ProofRoom renderDesign={renderDesign} onClose={() => setIsOpen(false)} />
       </DialogContent>
     </Dialog>
   );

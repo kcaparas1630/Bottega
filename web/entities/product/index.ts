@@ -1,2 +1,2 @@
-export type { PrintProduct, ProductId } from '@bottega/server';
+export type { PrintProduct, ProductColor, ProductId } from '@bottega/server';
 export { useListProducts } from './api';

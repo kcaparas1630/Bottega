@@ -1,15 +1,14 @@
 import { useState } from 'react';
 
 import { usePlaceDemoOrder } from '@/entities/order';
-import { useListProducts, type ProductId } from '@/entities/product';
 
 import type { ExportStep } from '../lib/export-steps';
+import { useProductChoice } from './use-product-choice';
 
-// Walks the export from product choice to a placed demo order.
+// Walks the export from the proof to a placed demo order.
 export function useExportFlow() {
-  const [step, setStep] = useState<ExportStep>('pick-product');
-  const [selectedProductId, setSelectedProductId] = useState<ProductId | null>(null);
-  const { data: products = [], isPending: isLoadingProducts } = useListProducts();
+  const [step, setStep] = useState<ExportStep>('proof');
+  const choice = useProductChoice();
   const {
     mutate: placeDemoOrder,
     data: placedOrder,
@@ -17,32 +16,32 @@ export function useExportFlow() {
     isError: didOrderFail,
     reset: resetOrder,
   } = usePlaceDemoOrder();
-  const selectedProduct = products.find((product) => product.id === selectedProductId) ?? null;
 
   return {
     step,
-    products,
-    isLoadingProducts,
-    selectedProduct,
+    choice,
     placedOrder: placedOrder ?? null,
     isPlacingOrder,
     didOrderFail,
     goToStep: setStep,
-    chooseProduct: (productId: ProductId) => {
-      setSelectedProductId(productId);
-      setStep('preview');
-    },
-    placeOrder: (customerEmail: string) => {
-      if (!selectedProduct) return;
+    placeOrder: (customerEmail: string, onPlaced: () => void) => {
+      const { product, color, size, quantity } = choice;
+      if (!product || !color) return;
       placeDemoOrder(
-        { productId: selectedProduct.id, customerEmail },
-        { onSuccess: () => setStep('complete') },
+        { productId: product.id, colorId: color.id, size, quantity, customerEmail },
+        {
+          onSuccess: () => {
+            setStep('complete');
+            onPlaced();
+          },
+        },
       );
     },
     startOver: () => {
       resetOrder();
-      setSelectedProductId(null);
-      setStep('pick-product');
+      setStep('proof');
     },
   };
 }
+
+export type ExportFlow = ReturnType<typeof useExportFlow>;

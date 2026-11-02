@@ -1,3 +1,4 @@
+import { BRAND_MARK_PATHS, BRAND_MARK_SIZE } from '@/shared/config/brand-mark-paths';
 import { cn } from '@/shared/lib/cn';
 
 type BrandMarkProps = {
@@ -9,16 +10,16 @@ type BrandMarkProps = {
 export function BrandMark({ className, label }: BrandMarkProps) {
   return (
     <svg
-      viewBox="0 0 574 574"
+      viewBox={`0 0 ${BRAND_MARK_SIZE} ${BRAND_MARK_SIZE}`}
       role={label ? 'img' : undefined}
       aria-label={label}
       aria-hidden={!label}
       fill="currentColor"
       className={cn('shrink-0', className)}
     >
-      <path d="M0 0H392A105 105 0 0 1 464.5 181H0Z" />
-      <path d="M0 203H408A165 165 0 0 1 573 368V377H0Z" />
-      <path d="M0 399H573V409A165 165 0 0 1 408 574H0Z" />
+      {BRAND_MARK_PATHS.map((path) => (
+        <path key={path} d={path} />
+      ))}
     </svg>
   );
 }

@@ -26,7 +26,12 @@ export function PaperArtboard({
         backgroundColor: design.paperColor,
       }}
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 paper-grain" />
+      {/* Grain only makes the screen read as paper, so it is marked to stay out of print pictures. */}
+      <div
+        aria-hidden
+        data-screen-only
+        className="pointer-events-none absolute inset-0 paper-grain"
+      />
       <div
         className="absolute top-0 left-0 origin-top-left"
         style={{ width: design.width, height: design.height, transform: `scale(${scale})` }}

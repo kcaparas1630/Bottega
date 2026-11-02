@@ -1,7 +1,7 @@
-export type ExportStep = 'pick-product' | 'preview' | 'checkout' | 'complete';
+export type ExportStep = 'proof' | 'checkout' | 'complete';
 
-export const EXPORT_STEPS: readonly { step: Exclude<ExportStep, 'complete'>; label: string }[] = [
-  { step: 'pick-product', label: 'Pick a product' },
-  { step: 'preview', label: 'Preview' },
-  { step: 'checkout', label: 'Checkout (demo)' },
+export const EXPORT_STEPS: readonly { step: ExportStep; label: string }[] = [
+  { step: 'proof', label: 'Proof' },
+  { step: 'checkout', label: 'Checkout' },
+  { step: 'complete', label: 'Done' },
 ];

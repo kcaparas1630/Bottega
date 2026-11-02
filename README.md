@@ -31,8 +31,9 @@ the [MIT licence](LICENSE).
   the design.
 - **Photo shelf** — searchable library with topics; click to place or drag onto the page.
 - **Page sizes** — Square, Portrait 4:5, Card 5:7, Landscape 3:2.
-- **Product preview** — see the design on a mug, t-shirt or greeting card at true print
-  proportions, with anything outside the print area shown faded.
+- **3D product proof** — see the design on a glazed mug, a cotton tee or a standing greeting card
+  in real-time 3D, drag to turn it, pick colours, sizes and quantity, and see how much of the
+  design the print area trims.
 - **Shopkeeper assistant** — asks what you are making and suggests photos and layout.
 
 ## Status
@@ -80,7 +81,8 @@ bun run start
 2. **Edit** — select anything on the page. The **Design** panel on the right sets font, size,
    alignment, colour, size, position, layer and opacity. Double-click text to type into it.
 3. **Set up the page** — with nothing selected, the Design panel sets page size and paper colour.
-4. **Export** — click **Export**, pick a product, check the preview, then try the demo checkout.
+4. **Export** — click **Export** to open the proof: choose a product and its options, turn it to
+   check the print, then try the demo checkout.
 
 Work saves automatically; rename the canvas in the header.
 
